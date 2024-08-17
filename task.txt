@@ -1,0 +1,7 @@
+Challenge: Create a GitHub Action Workflow to validate all pull requests and ensure our Helm code is valid and working.
+
+Requirements:
+- Must use GitHub Actions
+- Must create a single job workflow
+- You must run 2 helm commands to validate the Helm chart that lives in the GitHub repo (helm lint // helm template)
+- Validate that the GitHub Action check fails when the Helm chart has invalid code

@@ -1,0 +1,28 @@
+name: Helm Chart Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'feature/*'
+      
+jobs:
+  validate-helm-chart:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Validate Helm Chart with helm lint
+        run: |
+          helm lint ./charts
+
+      - name: Template Helm Chart with helm template
+        run: |
+          helm template ./charts --dry-run
+
