@@ -4,25 +4,24 @@ on:
   pull_request:
     branches:
       - main
-      - 'feature/*'
+      #- 'feature/*'
       
 jobs:
-  validate-helm-chart:
+  # validate-helm-chart:
+  build:
+    name: 'Validate'
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      # - name: Install Helm
+      #   run: |
+      #     curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
       - name: Validate Helm Chart with helm lint
-        run: |
-          helm lint ./charts
+        run: helm lint --strict
 
       - name: Template Helm Chart with helm template
-        run: |
-          helm template ./charts --dry-run
-
+        run: helm template . --debug
